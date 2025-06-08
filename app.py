@@ -24,7 +24,9 @@ def logger(func):
         elif func == 2:
             return redirect("https://accounts.google.com")
 
-    return "Invalid request", 400
+        return "Function not handled", 400
+
+    return "GET method not supported on this route", 405
 
 @app.route("/logger/<path:data>/<int:func>", methods=["GET", "POST"])
 def logger1(data, func):
@@ -38,8 +40,9 @@ def logger1(data, func):
     elif func == 2:
         return redirect("https://accounts.google.com")
 
-    return "Invalid request", 400
-
+    return "Function not handled", 400
 
 if __name__ == "__main__":
-    app.run()
+    # Jangan jalankan app.run() saat deploy di Vercel
+    # app.run()
+    pass
