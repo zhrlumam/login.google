@@ -34,4 +34,3 @@ def logger1(data, func):
     if eval(func) == 2:
       return redirect("https://accounts.google.com")
 
-app.run()
